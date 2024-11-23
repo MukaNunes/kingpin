@@ -1,0 +1,26 @@
+html {
+  height: 600px;
+  width: 700px;
+}
+
+body {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position:relative;
+  margin: 0 auto;
+  height: 600px !important;
+  width: 700px !important;
+}
+
+#root {
+
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
