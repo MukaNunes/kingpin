@@ -2,9 +2,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"],
+      "@images/*": ["./src/assets/images/*"],
+      "@ui/*": ["./src/components/ui/*"],
+      "@layout/*": ["./src/components/layout/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@services/*": ["./src/services/*"],
     },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2020",

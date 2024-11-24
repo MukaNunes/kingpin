@@ -1,7 +1,7 @@
 import "./App.css";
-import { Header } from "./components/layout/header";
-import { ThemeProvider } from "./components/theme-provider";
-import { TabList } from "./components/layout/tab-list";
+import { Header } from "@layout/header";
+import { ThemeProvider } from "@/components/theme-provider";
+import { TabList } from "@layout/tab-list";
 
 function App() {
   return (

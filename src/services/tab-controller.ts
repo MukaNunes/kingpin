@@ -1,4 +1,4 @@
-import ChromeTools from "./chrome-tools";
+import ChromeTools from "@services/chrome-tools";
 
 /**
  * Interface for TabItem
@@ -51,7 +51,8 @@ export class TabsController {
      * Loads the list of open tabs
      */
     public getTabList(): chrome.tabs.Tab[] {
-        return this.currentTabs.filter(tab => tab.title && tab.id);
+        return this.currentTabs
+            .filter(tab => tab.title && tab.id);
     }
 
 

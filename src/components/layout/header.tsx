@@ -1,7 +1,6 @@
-import { ListRestart, Trash2 } from "lucide-react";
-import logo from "../../../public/images/icon-32.png";
-import { Moon, Sun } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ListRestart, Trash2, Moon, Sun } from "lucide-react";
+import logo from "@images/icon-32.png";
+import { Button } from "@ui/button";
 import {
   Tooltip,
   TooltipContent,

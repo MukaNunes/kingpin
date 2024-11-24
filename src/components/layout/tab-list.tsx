@@ -1,9 +1,10 @@
-import logo from "../../../public/images/icon-32.png";
 import { useEffect, useState } from "react";
-import { TabsController } from "../../lib/tab-controller";
-import { Table, TableBody, TableCell, TableRow } from "../ui/table";
-import { ScrollArea } from "../ui/scroll-area";
-import { Switch } from "../ui/switch";
+import { TabsController } from "@services/tab-controller";
+import { Table, TableBody, TableCell, TableRow } from "@ui/table";
+import { ScrollArea } from "@ui/scroll-area";
+import { Switch } from "@ui/switch";
+import { Spinner } from "@/components/ui/spinner";
+import { handleImageError } from "@/lib/utils";
 
 export const TabList = () => {
   const [tabs, setTabs] = useState<chrome.tabs.Tab[]>([]);
@@ -22,9 +23,9 @@ export const TabList = () => {
   }, []);
 
   return (
-    <div className="flex overflow-hidden grow">
+    <div className="flex overflow-hidden grow align-middle justify-center m0 p0">
       {loading ? (
-        <p>Loading tabs...</p>
+        <Spinner />
       ) : (
         <ScrollArea className="rounded-md border flex overflow-hidden p-3 grow m-3">
           <Table>
@@ -32,7 +33,12 @@ export const TabList = () => {
               {tabs.map((tab, index) => (
                 <TableRow key={index}>
                   <TableCell>
-                    <img src={tab.favIconUrl || logo} alt="Favicon" />
+                    <img
+                      alt="tabIcon"
+                      src={tab.favIconUrl}
+                      onError={handleImageError}
+                      className="w-[32px] h-[32px]"
+                    />
                   </TableCell>
                   <TableCell>{tab.title}</TableCell>
                   <TableCell>
