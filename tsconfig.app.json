@@ -6,6 +6,7 @@
       "@images/*": ["./src/assets/images/*"],
       "@ui/*": ["./src/components/ui/*"],
       "@layout/*": ["./src/components/layout/*"],
+      "@providers/*": ["./src/providers/*"],
       "@lib/*": ["./src/lib/*"],
       "@services/*": ["./src/services/*"],
     },

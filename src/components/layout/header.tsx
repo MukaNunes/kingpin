@@ -1,22 +1,44 @@
-import { ListRestart, Trash2, Moon, Sun } from "lucide-react";
+import { ListRestart, Trash2, Moon, Sun, Undo2 } from "lucide-react";
 import logo from "@images/icon-32.png";
 import { Button } from "@ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../ui/tooltip";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import { useTheme } from "../theme-provider";
+} from "@ui/dropdown-menu";
+import { useTheme } from "@providers/theme-provider";
+import { useTabs } from "@/providers/tabs-hook";
+
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../ui/alert-dialog";
 
 export const Header = () => {
   const { setTheme } = useTheme();
+  const tabsContext = useTabs();
+
+  const handleConfirm = async () => {
+    await tabsContext?.deleteTabs();
+    self.close();
+  };
+
+  if (!tabsContext) {
+    throw new Error("TabsContext must be used within a TabsProvider");
+  }
+
+  async function reloadTabs() {
+    await tabsContext?.reloadTabs();
+    self.close();
+  }
 
   return (
     <header className="flex items-center overflow-hidden p-3 bg-secondary light:shadow-[#b6b6b6] shadow shadow-b-2 z-50 ">
@@ -24,63 +46,64 @@ export const Header = () => {
         <img src={logo} alt="Logo" className="mr-2" /> KingPin
       </h1>
 
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="icon" className="w-20 mr-2">
-                  <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                  <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                  <span className="sr-only">Toggle theme</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setTheme("light")}>
-                  Light
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("dark")}>
-                  Dark
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme("system")}>
-                  System
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Change between light and dark mode</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline" size="icon" className="w-20 mr-2">
+            <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+            <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem onClick={() => setTheme("light")}>
+            Light
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setTheme("dark")}>
+            Dark
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setTheme("system")}>
+            System
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
 
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button variant="destructive" className="mr-2">
+      <AlertDialog>
+        <AlertDialogTrigger asChild>
+          <Button variant="destructive" className="mr-2">
+            <Trash2 />
+            Clear
+          </Button>
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Stored Data Deletion</AlertDialogTitle>
+            <AlertDialogDescription>
+              Are you sure you want to delete all saved tabs?
+              <br />
+              This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>
+              <Undo2 />
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleConfirm}
+              className={
+                "bg-destructive hover:bg-destructive text-destructive-foreground"
+              }
+            >
               <Trash2 />
-              Clear
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Clear all pinned tabs</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+              Delete all saved data
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button>
-              <ListRestart />
-              Restore
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Restore all pinned tabs</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+      <Button className="dark:text-white" onClick={reloadTabs}>
+        <ListRestart />
+        Restore
+      </Button>
     </header>
   );
 };

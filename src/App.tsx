@@ -1,13 +1,16 @@
 import "./App.css";
 import { Header } from "@layout/header";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
 import { TabList } from "@layout/tab-list";
+import { TabsProvider } from "@providers/tabs-provider";
 
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <Header />
-      <TabList />
+      <TabsProvider>
+        <Header />
+        <TabList />
+      </TabsProvider>
     </ThemeProvider>
   );
 }

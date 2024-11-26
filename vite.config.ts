@@ -25,6 +25,7 @@ export default defineConfig({
       "@images": path.resolve(__dirname, "./src/assets/images"),
       "@ui": path.resolve(__dirname, "/src/components/ui"),
       "@layout": path.resolve(__dirname, "/src/components/layout"),
+      "@providers": path.resolve(__dirname, "/src/providers"),
       "@lib": path.resolve(__dirname, "/src/lib"),
       "@services": path.resolve(__dirname, "/src/services"),
     },
