@@ -1,6 +1,8 @@
 # KingPin
 Chrome extension for pinned tabs management builded with vite + react + chadcn/ui
-[Get it on the Chrome Web Store](https://chromewebstore.google.com/detail/kingpin/genjpbdpefjmiemjiknpdedkgfocgeki?hl=pt-br)
+
+
+> [Get it on the Chrome Web Store: ](https://chromewebstore.google.com/detail/kingpin/genjpbdpefjmiemjiknpdedkgfocgeki?hl=pt-br)
 
 ### Privacy Policy
 This is an open-source extension created for learning purposes. This privacy policy explains how the data of open tabs is managed and maintained.
