@@ -14,12 +14,8 @@
         "default_popup": "index.html",
         "default_title": "KingPin - Pinned tabs manager"
     },
-    "host_permissions": [
-        "https://developer.chrome.com/*"
-    ],
     "permissions": [
         "tabs",
-        "activeTab",
         "storage"
     ]
 }
